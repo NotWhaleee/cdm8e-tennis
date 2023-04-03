@@ -1,7 +1,4 @@
 asect 0x46
-
-    #setsp 0xbf #0xbf is the last avalible memory cell that we can operate with
-
     ldi r1, xBall
     ldi r2, 10 #set coord x to xBalls
     st r1, r2
@@ -10,17 +7,26 @@ asect 0x46
     ldi r1, yBall
     st r1, r2
 
-    ldi r0, display
+
+    ldi r3, display 
     ldi r1, 110 #set left platform in the middle
-    st r0, r1
+    st r3, r1
 
     ldi r0, end_display #set right platform
     st r0, r1
 
-    ldi r3, 0
+    #r3 will be always reserved for xBall+display
+    ldi r1,xBall #draw ball's start pos
+    ld r1, r1
+    add r1, r3
+    jsr draw_pixel
+
     while
-        tst r3
+        ldi r0, 0
+        tst r0
     stays eq   # = while(1)
+        jsr go_right
+
         ldi r0, joystick
         ld r0, r0
         if 
@@ -41,15 +47,11 @@ asect 0x46
 halt
 
 draw_pixel:
-    ldi r0, display
-    ldi r1,xBall
-    ld r1, r1
-    add r1, r0
     ldi r1, 0x20 #write ball
     ldi r2, yBall
     ld r2, r2
     or r2, r1
-    st r0, r1
+    st r3, r1
     rts
 
 go_up:
@@ -63,23 +65,21 @@ go_down:
     rts
 
 clr_pixel:
-    ldi r0, xBall
-    ld r0, r0
-    ldi r1, display
-    add r1, r0
     ldi r1, 0
-    st r0, r1 
+    st r3, r1 
     rts
 
 go_right:
     jsr clr_pixel
-    jsr inc_xBall
+    #jsr inc_xBall
+    inc r3
     jsr draw_pixel
     rts
 
 go_left:
     jsr clr_pixel
-    jsr dec_xBall
+    #jsr dec_xBall
+    dec r3
     jsr draw_pixel
     rts
 
@@ -116,6 +116,7 @@ inc_xBall:
     ld r0, r1
     inc r1
     st r0, r1
+    inc r3
     rts
 
 dec_xBall:
@@ -123,6 +124,7 @@ dec_xBall:
     ld r0, r1
     dec r1
     st r0, r1
+    dec r3
     rts
 
 inc_yBall:
