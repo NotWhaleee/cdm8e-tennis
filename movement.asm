@@ -1,10 +1,4 @@
 asect 0x46
-<<<<<<< HEAD
-=======
-
-    #setsp 0xbf #0xbf is the last avalible memory cell that we can operate with
-
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     ldi r1, xBall
     ldi r2, 10 #set coord x to xBalls
     st r1, r2
@@ -13,48 +7,19 @@ asect 0x46
     ldi r1, yBall
     st r1, r2
 
-<<<<<<< HEAD
 
     ldi r3, display 
     ldi r1, 110 #set left platform in the middle
     st r3, r1
-=======
-    ldi r0, display
-    ldi r1, 110 #set left platform in the middle
-    st r0, r1
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
 
     ldi r0, end_display #set right platform
     st r0, r1
 
-<<<<<<< HEAD
     #r3 will be always reserved for xBall+display
     ldi r1,xBall #draw ball's start pos
     ld r1, r1
     add r1, r3
     jsr draw_pixel
-=======
-    ldi r3, 0
-    while
-        tst r3
-    stays eq   # = while(1)
-        ldi r0, joystick
-        ld r0, r0
-        if 
-            tst r0
-        is eq
-        then
-            jsr go_up_pl_left
-        else
-            if
-                tst r0
-            is pl
-            then
-                jsr go_down_pl_left
-            fi
-        fi
-    wend
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
 
     while
         ldi r0, 0
@@ -82,22 +47,11 @@ asect 0x46
 halt
 
 draw_pixel:
-<<<<<<< HEAD
-=======
-    ldi r0, display
-    ldi r1,xBall
-    ld r1, r1
-    add r1, r0
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     ldi r1, 0x20 #write ball
     ldi r2, yBall
     ld r2, r2
     or r2, r1
-<<<<<<< HEAD
     st r3, r1
-=======
-    st r0, r1
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     rts
 
 go_up:
@@ -111,38 +65,21 @@ go_down:
     rts
 
 clr_pixel:
-<<<<<<< HEAD
     ldi r1, 0
     st r3, r1 
-=======
-    ldi r0, xBall
-    ld r0, r0
-    ldi r1, display
-    add r1, r0
-    ldi r1, 0
-    st r0, r1 
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     rts
 
 go_right:
     jsr clr_pixel
-<<<<<<< HEAD
     #jsr inc_xBall
     inc r3
-=======
-    jsr inc_xBall
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     jsr draw_pixel
     rts
 
 go_left:
     jsr clr_pixel
-<<<<<<< HEAD
     #jsr dec_xBall
     dec r3
-=======
-    jsr dec_xBall
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     jsr draw_pixel
     rts
 
@@ -179,10 +116,7 @@ inc_xBall:
     ld r0, r1
     inc r1
     st r0, r1
-<<<<<<< HEAD
     inc r3
-=======
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     rts
 
 dec_xBall:
@@ -190,10 +124,7 @@ dec_xBall:
     ld r0, r1
     dec r1
     st r0, r1
-<<<<<<< HEAD
     dec r3
-=======
->>>>>>> 59b7f7cf1777e2f96ce6d068cea5673cdbdead30
     rts
 
 inc_yBall:
