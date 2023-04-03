@@ -1,4 +1,5 @@
 asect 0x46
+
     #setsp 0xbf #0xbf is the last avalible memory cell that we can operate with
 
     ldi r1, xBall
