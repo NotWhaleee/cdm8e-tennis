@@ -6,7 +6,7 @@ asect 0x46
     ldi r2, 10 #set coord x to xBalls
     st r1, r2
 
-    ldi r2, 0x7d #set coord y to yBalls
+    ldi r2, 10 #set coord y to yBalls
     ldi r1, yBall
     st r1, r2
 
@@ -17,12 +17,10 @@ asect 0x46
     ldi r0, end_display #set right platform
     st r0, r1
 
-    jsr draw_pixel
     ldi r3, 0
     while
         tst r3
     stays eq   # = while(1)
-        jsr go_up
         ldi r0, joystick
         ld r0, r0
         if 
